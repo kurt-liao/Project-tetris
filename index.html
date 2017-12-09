@@ -1,14 +1,29 @@
 <html>
-<head>
-  <title>Tetris</title>
 
+<head>	
+	<title>Tetris</title>
+	<link rel="stylesheet" href="style.css">
 </head>
-<body>
-  <div id = "score"></div>
-  <canvas id = "tetris" width="240" height="400"></canvas>
 
-  <script src ="TetrisModel.js"></script>
-  <script src ="TetrisView.js"></script>
-  <script src ="TetrisController.js"></script>
+<body>
+
+	<div id = "back">
+		<div class = "float">
+			<canvas id = "tetris" class = "box"></canvas>
+		</div>
+
+		<div  id = "info" class = "float">
+			<p class = "text">Next</p>
+			<div id = "next" class = "box"></div>
+			<div id = "space"></div>
+			<p class = "text">Score</p>
+			<div id = "score" class = "box"></div>
+	  	</div>
+	</div>
+
+	<script src ="TetrisModel.js"></script>
+	<script src ="TetrisView.js"></script>
+	<script src ="TetrisController.js"></script>
 </body>
+
 </html>
