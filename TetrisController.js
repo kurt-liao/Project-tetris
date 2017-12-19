@@ -6,6 +6,7 @@ var TetrisController = function(model, view){
 	}
 
 	this.start = function(){
+		tetrisview.updateGameView();
 	}
 
 };
@@ -15,3 +16,4 @@ var view = new TetrisView(model);
 var controller = new TetrisController(model, view);
 
 controller.start();
+document.addEventListener('keydown', view.getUserKeyDown, false);
