@@ -7,11 +7,11 @@ var TetrisView = function(model){
     var dropInterval = 1000;
     var lastTime = 0;
     
-    /*matrix = [
+    matrix = [
     	[0, 0, 0],
         [1, 1, 1],
         [0, 1, 0],
-    ]*/
+    ]
 
     const player = {
         pos: {x: 5, y: 5},
