@@ -6,35 +6,34 @@ var TetrisView = function(model){
     var dropCounter = 0;
     var dropInterval = 1000;
     var lastTime = 0;
-    
-    matrix = [
-    	[0, 0, 0],
-        [1, 1, 1],
-        [0, 1, 0],
-    ]
+    const arena = tetrismodel.createMatrix(12, 20);
 
     const player = {
-        pos: {x: 5, y: 5},
-        matrix: matrix,
+        pos: {x: 0, y: 0},
+        matrix: tetrismodel.cubeRandom('T'),
 	}
 
 	this.draw = function(){
         context.fillStyle = "#222";//"rgba(0, 0, 0, 0)";
         context.fillRect(0, 0, canvas.width, canvas.height);
+        tetrismodel.drawMatrix(context, arena, {x: 0, y: 0});
         tetrismodel.drawMatrix(context, player.matrix, player.pos);
     }
 
-    this.getUserKeyDown = function(){
-        if(event.keyCode===39) //right
-            tetrismodel.cubeMove(player , 1);
-        else if(event.keyCode===37) //left
-            tetrismodel.cubeMove(player , -1);
-        else if(event.keyCode===40) {//down
-            tetrismodel.cubeDrop(player);
+    this.getUserKeyDown = function(event){
+        if(event.keyCode === 39) //right
+            tetrismodel.cubeMove(arena, player , 1);
+        else if(event.keyCode === 37) //left
+            tetrismodel.cubeMove(arena, player , -1);
+        else if(event.keyCode === 40) {//down
+            tetrismodel.cubeDrop(arena, player);
             dropCounter = 0;
-        }
-        else if(event.keyCode===38) //rotate
-            tetrismodel.cubeRotate(player.matrix , 1);
+        }else if(event.keyCode === 38) //up
+            tetrismodel.cubeRotateFixed(arena, player, 1);
+        else if (event.keyCode === 32){
+            //console.log('space!!!!!!');
+            tetrismodel.cubeFall(arena, player);
+        } // space
     }
 
     this.updateGameView = function(time = 0){
@@ -42,7 +41,7 @@ var TetrisView = function(model){
         lastTime = time;
         dropCounter += deltaTime;
         if(dropCounter > dropInterval){
-            tetrismodel.cubeDrop(player);
+            tetrismodel.cubeDrop(arena, player);
             dropCounter = 0;
         }
 
@@ -53,7 +52,7 @@ var TetrisView = function(model){
     }
 
     this.setting = function(){
-
+        tetrismodel.cubeReset(arena, player);
     }
 };
 

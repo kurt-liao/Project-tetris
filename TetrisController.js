@@ -6,6 +6,7 @@ var TetrisController = function(model, view){
 	}
 
 	this.start = function(){
+		tetrisview.setting();
 		tetrisview.updateGameView();
 	}
 
