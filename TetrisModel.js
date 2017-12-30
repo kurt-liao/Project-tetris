@@ -61,6 +61,7 @@ var TetrisModel = function(){
             player.pos.y--;
             this.merge(arena, player);
             this.cubeReset(arena, player);
+            this.arenaSweep(arena, player);
         }
     }
 
@@ -77,9 +78,9 @@ var TetrisModel = function(){
         player.pos.y--;
         this.merge(arena, player);
         this.cubeReset(arena, player);
+        this.arenaSweep(arena,player);
     }
-    this.arenaSweep = function(){
-
+    this.arenaSweep = function(arena, player){
     }
 
     this.cubeControl = function(){
