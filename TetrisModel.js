@@ -81,10 +81,22 @@ var TetrisModel = function(){
         this.arenaSweep(arena,player);
     }
     this.arenaSweep = function(arena, player){
+                outer: for(var y = arena.length - 1; y > 0; y--){
+            for(var x = 0; x< arena[y].length; x++){
+                if(arena[y][x] === 0)
+                    continue outer;
+            }
+            var row = arena.splice(y, 1)[0].fill(0);
+            arena.unshift(row);
+            y++;
+        }
     }
 
     this.cubeControl = function(){
-
+        // this.cubeFall
+        // this.cubeDrop
+        // this.cubeMove
+        // this.cubeRotate
     }
 
     this.merge = function(arena, player){
