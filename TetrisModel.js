@@ -1,4 +1,5 @@
 var TetrisModel = function(){
+    var isStart = false;
     
     this.createMatrix = function(weight, height){
         const matrix = [];
@@ -81,7 +82,7 @@ var TetrisModel = function(){
         this.arenaSweep(arena,player);
     }
     this.arenaSweep = function(arena, player){
-                outer: for(var y = arena.length - 1; y > 0; y--){
+        outer: for(var y = arena.length - 1; y > 0; y--){
             for(var x = 0; x< arena[y].length; x++){
                 if(arena[y][x] === 0)
                     continue outer;
@@ -112,9 +113,16 @@ var TetrisModel = function(){
     this.arenaIsFull = function(){
 
     }
+    
     this.cubeReset = function(arena, player){
         const pieces = 'ILJOTZS';
-        player.matrix = this.cubeRandom(pieces[Math.floor(Math.random() * pieces.length)]);
+        if(isStart)
+            player.matrix = player.next;
+        else{
+            isStart = true;
+            player.matrix = this.cubeRandom(pieces[Math.floor(Math.random() * pieces.length)]);
+        }
+        player.next = this.cubeRandom(pieces[Math.floor(Math.random() * pieces.length)]);
         player.pos.y = 0;
         player.pos.x = (arena[0].length / 2 | 0) - (player.matrix[0].length / 2 | 0);
         if(this.isCollide(arena, player)){
@@ -126,9 +134,9 @@ var TetrisModel = function(){
          switch(type) {
             case 'T':
                 return [
-                    [0, 0, 0],
                     [1, 1, 1],
                     [0, 1, 0],
+                    [0, 0, 0],
                 ];
             case 'O':
                 return [
@@ -187,6 +195,29 @@ var TetrisModel = function(){
                 if (value !== 0) {
                     context.fillStyle = colors[value] ;
                     context.fillRect(x + offset.x, y + offset.y, 1, 1);
+                }
+            });
+        });
+    }
+
+    this.showMatrix = function(context, matrix){
+        matrix.forEach((row, y) => {
+            row.forEach((value, x) =>{
+                if (value == 2) {
+                    context.fillStyle = colors[value] ;
+                    context.fillRect(x + 1.5, y + 1.5, 1, 1);
+                }else if(value == 5){
+                    context.fillStyle = colors[value] ;
+                    context.fillRect(x + 1, y + 0.5, 1, 1);
+                }else if(value == 4){
+                    context.fillStyle = colors[value] ;
+                    context.fillRect(x + 1.5, y + 1.0, 1, 1);
+                }else if(value == 3){
+                    context.fillStyle = colors[value] ;
+                    context.fillRect(x + 0.8, y + 1.0, 1, 1);
+                }else if(value !== 0){
+                    context.fillStyle = colors[value] ;
+                    context.fillRect(x + 1, y + 1.5, 1, 1);
                 }
             });
         });

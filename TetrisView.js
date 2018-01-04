@@ -2,7 +2,10 @@ var TetrisView = function(model){
 	var tetrismodel = model;
 	var canvas = document.getElementById('tetris');
     var context = canvas.getContext('2d');
+    var canvasNext = document.getElementById('next');
+    var contextNext = canvasNext.getContext('2d');
     context.scale(20, 20);
+    contextNext.scale(16, 16);
     var dropCounter = 0;
     var dropInterval = 1000;
     var lastTime = 0;
@@ -11,9 +14,14 @@ var TetrisView = function(model){
     const player = {
         pos: {x: 0, y: 0},
         matrix: tetrismodel.cubeRandom('T'),
+        next: tetrismodel.cubeRandom('T'),
 	}
 
 	this.draw = function(){
+        contextNext.fillStyle = "#222";
+        contextNext.fillRect(0, 0, canvasNext.width, canvasNext.height);
+        tetrismodel.showMatrix(contextNext, player.next);
+
         context.fillStyle = "#222";//"rgba(0, 0, 0, 0)";
         context.fillRect(0, 0, canvas.width, canvas.height);
         tetrismodel.drawMatrix(context, arena, {x: 0, y: 0});
@@ -37,7 +45,7 @@ var TetrisView = function(model){
     }
 
     this.updateGameView = function(time = 0){
-        const deltaTime = time -lastTime;
+        const deltaTime = time - lastTime;
         lastTime = time;
         dropCounter += deltaTime;
         if(dropCounter > dropInterval){
