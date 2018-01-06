@@ -62,6 +62,7 @@ var TetrisView = function(model){
     this.setting = function(){
         tetrismodel.cubeReset(arena, player);
         tetrismodel.scoreCompute(player);
+        
     }
 };
 
