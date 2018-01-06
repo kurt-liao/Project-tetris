@@ -13,8 +13,9 @@ var TetrisView = function(model){
 
     const player = {
         pos: {x: 0, y: 0},
-        matrix: tetrismodel.cubeRandom('T'),
-        next: tetrismodel.cubeRandom('T'),
+        matrix: tetrismodel.cubeRandom(null),
+        next: tetrismodel.cubeRandom(null),
+        score: 0,
 	}
 
 	this.draw = function(){
@@ -38,10 +39,9 @@ var TetrisView = function(model){
             dropCounter = 0;
         }else if(event.keyCode === 38) //up
             tetrismodel.cubeRotateFixed(arena, player, 1);
-        else if (event.keyCode === 32){
-            //console.log('space!!!!!!');
+        else if (event.keyCode === 32){ // space
             tetrismodel.cubeFall(arena, player);
-        } // space
+        }
     }
 
     this.updateGameView = function(time = 0){
@@ -56,11 +56,12 @@ var TetrisView = function(model){
         //console.log(deltaTime);
         var self = this;
         self.draw();
-        requestAnimationFrame(self.updateGameView.bind(self));
+        var a = requestAnimationFrame(self.updateGameView.bind(self));
     }
 
     this.setting = function(){
         tetrismodel.cubeReset(arena, player);
+        tetrismodel.scoreCompute(player);
     }
 };
 

@@ -1,5 +1,6 @@
 var TetrisModel = function(){
     var isStart = false;
+    var bestScore = 0;
     
     this.createMatrix = function(weight, height){
         const matrix = [];
@@ -63,6 +64,7 @@ var TetrisModel = function(){
             this.merge(arena, player);
             this.cubeReset(arena, player);
             this.arenaSweep(arena, player);
+            this.scoreCompute(player);
         }
     }
 
@@ -80,8 +82,10 @@ var TetrisModel = function(){
         this.merge(arena, player);
         this.cubeReset(arena, player);
         this.arenaSweep(arena,player);
+        this.scoreCompute(player);
     }
     this.arenaSweep = function(arena, player){
+        var rowCount = 1;
         outer: for(var y = arena.length - 1; y > 0; y--){
             for(var x = 0; x< arena[y].length; x++){
                 if(arena[y][x] === 0)
@@ -90,6 +94,8 @@ var TetrisModel = function(){
             var row = arena.splice(y, 1)[0].fill(0);
             arena.unshift(row);
             y++;
+            player.score += rowCount * 100;
+            rowCount *=2;
         }
     }
 
@@ -121,12 +127,19 @@ var TetrisModel = function(){
         else{
             isStart = true;
             player.matrix = this.cubeRandom(pieces[Math.floor(Math.random() * pieces.length)]);
+            document.getElementById('bestScore').innerText = bestScore;
         }
         player.next = this.cubeRandom(pieces[Math.floor(Math.random() * pieces.length)]);
         player.pos.y = 0;
         player.pos.x = (arena[0].length / 2 | 0) - (player.matrix[0].length / 2 | 0);
         if(this.isCollide(arena, player)){
             arena.forEach(row => row.fill(0));
+            if(player.score > bestScore){
+                bestScore = player.score;
+                document.getElementById('bestScore').innerText = bestScore;
+            }
+            player.score = 0;
+            this.scoreCompute(player);
         }
     }
 
@@ -223,8 +236,8 @@ var TetrisModel = function(){
         });
     }
 
-    this.scoreCompute = function(){
-
+    this.scoreCompute = function(player){
+        document.getElementById('score').innerText = player.score;
     }
 
 };
