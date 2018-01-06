@@ -1,6 +1,17 @@
 var TetrisModel = function(){
     var isStart = false;
     var bestScore = 0;
+
+    var colors = [
+        null,
+        'red',
+        'red',
+        'red',
+        'red',
+        'red',
+        'red',
+        'red',
+    ];
     
     this.createMatrix = function(weight, height){
         const matrix = [];
@@ -190,18 +201,6 @@ var TetrisModel = function(){
         }
     }
 
-    const colors = [
-        null,
-        '#FF0D72',
-        '#0DC2FF',
-        '#0DFF72',
-        '#F538FF',
-        '#FF8E0D',
-        '#FFE138',
-        '#3877FF',
-    ];
-    
-
     this.drawMatrix = function(context, matrix, offset){
         matrix.forEach((row, y) => {
             row.forEach((value, x) =>{
@@ -234,6 +233,10 @@ var TetrisModel = function(){
                 }
             });
         });
+    }
+
+    this.changeCubeColor = function(colorValue){
+        colors = colorValue;
     }
 
     this.scoreCompute = function(player){

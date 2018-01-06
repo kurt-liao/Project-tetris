@@ -1,9 +1,10 @@
 body{
-	background-image: url("back.jpg");
+	background-image: url("img/back.jpg");
 	background-repeat: no-repeat;
     background-attachment: fixed;
-    background-position: center; 
-    background-color:#FCFAF2;  
+    background-position: center;
+    background-size: cover;
+    background-color: #FCFAF2;  
 }
 
 .box{
@@ -45,6 +46,7 @@ body{
 
 .text{
 	font-size: 24px;
+	font-family: Georgia, Serif;
 	margin-top: 0px;
 	margin-bottom: 8px;
 	background-color: rgba(0, 0, 0, 0.6);
