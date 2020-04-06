@@ -1,7 +1,7 @@
 Project Tetris: 俄羅斯起子
 ===
 
-> 組長：B10415025 洪昱翔 B10415025@mail.ntust.edu.tw
+> 組長：B10415025 Sam B10415025@mail.ntust.edu.tw
 > 組員：B10415031 廖晨竹 B10415031@mail.ntust.edu.tw
 > 組員：B10415048 楊宗儒 B10415048@mail.ntust.edu.tw
 > 組員：B10415012 黃政維 B10415012@mail.ntust.edu.tw
