@@ -10,7 +10,7 @@ Project Tetris: 俄羅斯起子
 
 ## Introduction
 決戰俄羅斯是一款傳統俄羅斯方塊的遊戲，主要以網頁方式呈現，HTML 為框架、CSS為遊戲畫面的調整，Javascript 則會以MVC 設計架構來呈現，透過簡單的方向鍵控制來回味兒時的經典遊戲。
-
+Play it NOW: https://sam5727.github.io/Project-tetris/
 ---
 
 ## Design Considerations
